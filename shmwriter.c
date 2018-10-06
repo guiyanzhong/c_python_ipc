@@ -10,7 +10,7 @@ int main(int argc, const char **argv)
 {
    int shmid;
    key_t key = 123456;
-   char *shared_memory;
+   void *shared_memory;
 
    // Setup shared memory 
    if ((shmid = shmget(key, 11, IPC_CREAT | 0666)) < 0)
@@ -19,7 +19,8 @@ int main(int argc, const char **argv)
       exit(1);
    }
    // Attached shared memory
-   if ((shared_memory = shmat(shmid, NULL, 0)) == (char *) -1) 
+   shared_memory = shmat(shmid, NULL, 0);
+   if (!shared_memory)
    {
       printf("Error attaching shared memory id");
       exit(1);
