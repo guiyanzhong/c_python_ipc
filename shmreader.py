@@ -7,8 +7,8 @@ memory = sysv_ipc.SharedMemory(123456)
 frameCount = memory.read()
 
 # Find the 'end' of the string and strip
-i = frameCount.find('\0')
+i = frameCount.find('\0'.encode())
 if i != -1:
     frameCount = frameCount[:i]
 
-print frameCount
+print(frameCount.decode())
