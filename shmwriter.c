@@ -4,6 +4,7 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/shm.h>
+#include <unistd.h>
 
 int main(int argc, const char **argv)
 {
@@ -26,6 +27,6 @@ int main(int argc, const char **argv)
    memcpy(shared_memory, "Hello World", sizeof("Hello World"));
    sleep(10);
    // Detach and remove shared memory
-   shmdt(shmid);
+   shmdt(shared_memory);
    shmctl(shmid, IPC_RMID, NULL);
 }
